@@ -2,7 +2,7 @@
 clear
 tn = 10;        % RH edge
 t0 = 0;         % LH edge
-a = .5;         % Grid point spacing
+a = 1.;         % Grid point spacing
 
 %% Setup Linear System
 t = t0:a:tn;                % Vector of grid points
@@ -14,19 +14,15 @@ for i = 1 : length(t)
     if i == 1
         A(i, i) = 1;
         b(i) = 85;
-    elseif i == 2
-       A(i, i + 1) = 1 / (2 * a);
-       A(i, i) = 0.5;
-       b(i) = 10.5 + (85 / (2 * a));
-   elseif i == length(t)
-       A(i, i) = (0.5 + 1 / a);
-       A(i, i - 1) = - 1 / a;
-       b(i) = 10.5;
-   else
-       A(i, i + 1) = 1 / (2 * a);
-       A(i, i) = 0.5;
-       A(i, i - 1) = - 1 / (2 * a);
-       b(i) = 10.5;
+    elseif i == length(t)
+        A(i, i) = (0.5 + 1 / a);
+        A(i, i - 1) = - 1 / a;
+        b(i) = 10.5;
+    else
+        A(i, i + 1) = 1 / (2 * a);
+        A(i, i) = 0.5;
+        A(i, i - 1) = - 1 / (2 * a);
+        b(i) = 10.5;
    end
 end
 
