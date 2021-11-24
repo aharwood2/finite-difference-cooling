@@ -11,13 +11,16 @@ b = zeros(length(t), 1);    % Empty vector of RH side of equations
 
 % Build in a loop
 for i = 1 : length(t)
+    % LH boundary
     if i == 1
         A(i, i) = 1;
         b(i) = 85;
+    % RH boundary (BDS)
     elseif i == length(t)
         A(i, i) = (0.5 + 1 / a);
         A(i, i - 1) = - 1 / a;
         b(i) = 10.5;
+    % Everywhere else (CDS)
     else
         A(i, i + 1) = 1 / (2 * a);
         A(i, i) = 0.5;
